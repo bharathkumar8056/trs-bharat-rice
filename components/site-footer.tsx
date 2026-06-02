@@ -4,7 +4,7 @@ import { Instagram, Facebook, Linkedin, Twitter, Mail, Phone, MapPin } from "luc
 const quickLinks = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/#about" },
-  { label: "Quality Policy", href: "/#quality" },
+  // { label: "Quality Policy", href: "/#quality" },
   { label: "Certifications", href: "/certifications" },
   { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "/#faq" },

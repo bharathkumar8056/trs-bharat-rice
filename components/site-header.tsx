@@ -8,7 +8,7 @@ import { Menu, X, ChevronDown } from "lucide-react"
 const navLinks: Array<{ label: string; href: string }> = [
   { label: "Home", href: "/" },
   { label: "About us", href: "/#about" },
-  { label: "Quality Policy", href: "/#quality" },
+  // { label: "Quality Policy", href: "/#quality" },
   { label: "Certifications", href: "/certifications" },
   { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "/faq" },
@@ -74,9 +74,9 @@ export function SiteHeader() {
               </div>
             </div>
 
-            <Link href="/#quality" className="hover:text-amber-300 transition-colors">
+            {/* <Link href="/#quality" className="hover:text-amber-300 transition-colors">
               Quality Policy
-            </Link>
+            </Link> */}
             <Link href="/certifications" className="hover:text-amber-300 transition-colors">
               Certifications
             </Link>
