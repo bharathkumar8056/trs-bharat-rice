@@ -329,7 +329,7 @@ export default function HomePage() {
           loop
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
-          poster="/assets/banner.jpg"
+          poster="/assets/hero-banner.jpg"
         >
           {/* TODO: replace with final hero banner video path */}
           <source src="/assets/banner-video.mp4" type="video/mp4" />
