@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import Link from "next/link"
+import { riceVarieties } from "@/lib/rice"
 import {
   Phone,
   Mail,
@@ -18,7 +20,6 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import emailjs from "@emailjs/browser"
@@ -157,163 +158,7 @@ export default function HomePage() {
       setIsSubmitting(false)
     }
   }
-  // Frequently Asked Questions
-  const faqs = [
-    {
-      question: "What is Non-Basmati Rice?",
-      answer:
-        "Non-Basmati rice refers to rice varieties grown in India that are not aromatic Basmati. These include medium and short-grain varieties widely used for daily consumption across Asia, Africa, and the Middle East.",
-    },
-    {
-      question: "Which types of Non-Basmati Rice do you export?",
-      answer:
-        "We export popular Indian varieties such as Sona Masoori, IR-64, PR-11/PR-14, Ponni, Swarna, and 100% Broken Rice based on buyer requirements.",
-    },
-    {
-      question: "From which regions in India is your rice sourced?",
-      answer:
-        "Our rice is sourced from leading paddy belts such as Tamil Nadu, Andhra Pradesh, Telangana, Chhattisgarh, Odisha, Punjab, Haryana, and West Bengal.",
-    },
-    {
-      question: "What are the common specifications for non-basmati you offer?",
-      answer:
-        "Typical specifications include: Moisture 12–14%; Broken 5%, 10%, 25%, 100%; Sortex Cleaned; Well milled and polished; Crop: Latest harvest.",
-    },
-    {
-      question: "Is your rice Sortex cleaned?",
-      answer:
-        "Yes, all rice is processed through advanced Sortex machines to ensure uniform grain quality and removal of impurities.",
-    },
-    {
-      question: "What packaging options do you provide?",
-      answer:
-        "We offer 5 kg, 10 kg, 25 kg, 50 kg PP bags, BOPP laminated bags, and custom private-label packaging. Also, Jute bags are available.",
-    },
-    {
-      question: "Do you provide private labeling?",
-      answer:
-        "Yes, we support private labeling with customized bag design and branding as per buyer requirements.",
-    },
-    {
-      question: "What certifications do you provide with the shipment?",
-      answer:
-        "We provide: Phytosanitary Certificate, Fumigation Certificate, Certificate of Origin, SGS/Intertek inspection (if required), and Health Certificate (if required).",
-    },
-    {
-      question: "What is the minimum order quantity (MOQ)?",
-      answer:
-        "MOQ is typically 1 x 20 ft container, but trial orders can be discussed.",
-    },
-    {
-      question: "What is the container loading capacity?",
-      answer:
-        "20 ft container: 24–26 MT. 40 ft container: 26–28 MT (depending on packing).",
-    },
-    {
-      question: "What are your payment terms?",
-      answer:
-        "We accept: Advance Payment (T/T) — 100% before shipment (commonly for small or first-time orders); 50% Advance + 50% Before Shipment (recommended for new clients); Letter of Credit (L/C) — Irrevocable L/C at sight for large-volume orders.",
-    },
-    {
-      question: "How do you ensure quality before shipment?",
-      answer:
-        "Every lot undergoes pre-shipment quality checks, moisture testing, and sortex verification before container stuffing.",
-    },
-    {
-      question: "What is the shelf life of Non-Basmati rice?",
-      answer: "Properly stored rice has a shelf life of 12–24 months.",
-    },
-    {
-      question: "Is fumigation done before shipment?",
-      answer: "Yes, fumigation is mandatory and done as per importing country norms.",
-    },
-    {
-      question: "Can you supply rice as per specific country standards?",
-      answer: "Yes, we customize specifications as per African, Gulf, and Asian country import standards.",
-    },
-    {
-      question: "Do you provide samples before order confirmation?",
-      answer: "Yes, samples can be couriered for quality approval.",
-    },
-    {
-      question: "What is the average lead time for shipment?",
-      answer: "Usually 10–15 days from order confirmation and payment/LC.",
-    },
-    {
-      question: "Do you handle export documentation?",
-      answer: "Yes, we handle complete export documentation and customs clearance from India.",
-    },
-    {
-      question: "What makes Indian Non-Basmati rice preferred globally?",
-      answer:
-        "Indian rice is known for: Consistent grain size, Good cooking quality, Competitive pricing, and Reliable supply.",
-    },
-    {
-      question: "Can you supply 100% broken rice for industrial use?",
-      answer:
-        "Yes, we export 100% broken rice for breweries, animal feed, and industrial food processing.",
-    },
-    {
-      question: "Do you offer CIF and FOB pricing?",
-      answer: "Yes, we quote on FOB, CFR, and CIF basis to all major ports.",
-    },
-    {
-      question: "How is the rice stored before export?",
-      answer: "Rice is stored in hygienic, moisture-controlled warehouses to maintain quality.",
-    },
-    {
-      question: "How can a buyer place an order with you?",
-      answer:
-        "Buyers can contact us with their required specifications, quantity, destination port, and preferred terms. We will share a formal quotation and proceed accordingly.",
-    },
-    {
-      question: "Do you offer customized grain length and broken percentage?",
-      answer:
-        "Yes, we can customize grain length, broken percentage, polishing level, and color sorting based on buyer specifications.",
-    },
-    {
-      question: "Can you arrange third-party inspection before shipment?",
-      answer:
-        "Yes, third-party inspections by SGS, Intertek, Bureau Veritas, or buyer-appointed agencies can be arranged.",
-    },
-    {
-      question: "Can you supply rice throughout the year?",
-      answer:
-        "Yes, we maintain continuous sourcing and stock management to ensure year-round supply.",
-    },
-    {
-      question: "Do you support long-term supply contracts?",
-      answer:
-        "Yes, we welcome long-term business partnerships and annual supply agreements with international buyers.",
-    },
-  ]
-
-  const products = [
-    /* {
-      name: "Flowers",
-      description: "Beautiful and fresh flowers for every occasion",
-      image: "/assets/flowers/rose-cut-flower.jpg",
-      features: ["Roses", "Tulips", "Lilies", "Orchids"],
-    },
-    {
-      name: "Coconut",
-      description: "Fresh coconuts and coconut products from tropical plantations",
-      image: "/assets/Coconut.webp",
-      features: ["Fresh Coconuts", "Coconut Oil", "Desiccated Coconut", "Coconut Water"],
-    }, */
-    {
-      name: "Rice",
-      description: "High-quality rice varieties sourced from the finest farms across India",
-      image: "/assets/Rice.png",
-      features: ["Basmati Rice", "JPonni Rice", "IR-20 Rice", "Matta Rice", "Sambha Rice", "Kolam Rice", "Organic Varieties"],
-    },
-    /* {
-      name: "Cashew Nuts",
-      description: "Premium cashew nuts processed with international quality standards",
-      image: "/assets/Cashew-nuts.jpg",
-      features: ["W180 Grade", "W240 Grade", "W320 Grade", "Broken Varieties"],
-    }, */
-  ]
+  const riceNames = riceVarieties.map((rice) => rice.name).join(", ")
 
   return (
     <div suppressHydrationWarning className="min-h-screen bg-gradient-to-br from-blue-50 to-amber-50">
@@ -321,7 +166,7 @@ export default function HomePage() {
       <SiteHeader />
 
       {/* Hero Section — Full-width Banner Video with Overlaid Text */}
-      <section id="home" className="relative w-full h-[80vh] min-h-[650px] overflow-hidden">
+      <section id="home" className="relative w-full h-[80vh] min-h-[700px] overflow-hidden">
         {/* Background Video */}
         <video
           autoPlay
@@ -925,52 +770,49 @@ export default function HomePage() {
       <section id="products" className="py-16 px-4 bg-gradient-to-br from-blue-50 to-amber-50">
         <div className="container mx-auto">
           <div className="text-center mb-12">
-            <h3 className="text-3xl sm:text-4xl font-bold text-blue-900 mb-4">Our Premium Products</h3>
-            <p className="text-blue-700 text-lg">Discover our range of high-quality agricultural products</p>
+            <h3 className="text-3xl sm:text-4xl font-bold text-blue-900 mb-4">Our Premium Rice</h3>
+            <p className="text-blue-700 text-lg max-w-3xl mx-auto">
+              Our rice portfolio includes {riceNames}. These premium Indian varieties are selected for export-grade quality, global demand, and consistent cooking performance.
+            </p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-8">
-            {products.map((product, index) => (
-              <Card
-                key={index}
-                className="overflow-hidden hover:shadow-xl transition-shadow border-blue-200 w-full sm:w-[22rem] md:w-[24rem]"
-              >
-                <div className="h-48 bg-gradient-to-br from-blue-100 to-amber-100 flex items-center justify-center">
-                  <img
-                    src={product.image || "/placeholder.svg"}
-                    alt={product.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <CardHeader>
-                  <CardTitle className="text-blue-900">{product.name}</CardTitle>
-                  <CardDescription className="text-blue-700">{product.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {product.features.map((feature, idx) => (
-                      <Badge key={idx} variant="secondary" className="bg-amber-100 text-amber-800">
-                        {feature}
-                      </Badge>
-                    ))}
+          <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] items-center">
+            <div className="rounded-3xl overflow-hidden border border-blue-100 bg-white shadow-lg">
+              <img
+                src="/assets/Rice.png"
+                alt="Premium rice varieties"
+                className="w-full h-[480px] object-cover"
+              />
+            </div>
+
+            <div className="space-y-6">
+              <div className="rounded-3xl border border-blue-100 bg-white p-8 shadow-lg">
+                <h4 className="text-3xl font-bold text-blue-900 mb-4">Rice Varieties for Global Export</h4>
+                <p className="text-blue-700 leading-relaxed">
+                  Our product range covers premium Indian rice varieties such as Basmati, Ponni, IR-20, ADT 43, Matta, Vadi Matta, White Matta, Sambha, Sona Masoori, Kurnool Sona, Kolam, Jeerakasala, and Gandhagi. We focus on consistent quality, proper packaging, and reliable international logistics.
+                </p>
+
+                <div className="grid gap-4 sm:grid-cols-2 mt-8">
+                  <div className="rounded-2xl border border-blue-100 bg-blue-50 p-5">
+                    <h5 className="text-lg font-semibold text-blue-900 mb-2">Basmati</h5>
+                    <p className="text-blue-700">Perfect for biryani, pulao and premium dining.</p>
                   </div>
-                  {product.name === "Flowers" && (
-                    <a href="/flowers" className="block">
-                      <Button className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white">
-                        View Full Flower Varieties
-                      </Button>
-                    </a>
-                  )}
-                  {product.name === "Rice" && (
-                    <a href="/rice" className="block">
-                      <Button className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white">
-                        View All Varieties
-                      </Button>
-                    </a>
-                  )}
-                </CardContent>
-              </Card>
-            ))}
+                  <div className="rounded-2xl border border-blue-100 bg-blue-50 p-5">
+                    <h5 className="text-lg font-semibold text-blue-900 mb-2">Non-Basmathi</h5>
+                    <p className="text-blue-700">Soft, nourishing rice like Ponni and Matta for daily meals.</p>
+                  </div>
+                </div>
+
+                <div className="mt-8 flex flex-wrap gap-4">
+                  <Button asChild size="lg" className="bg-amber-500 hover:bg-amber-600 text-white">
+                    <Link href="/rice">Browse Rice Range</Link>
+                  </Button>
+                  <Button asChild variant="outline" size="lg" className="text-blue-900 border-blue-900 hover:bg-blue-900 hover:text-white">
+                    <Link href="/faq">Read FAQ</Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -1207,7 +1049,7 @@ export default function HomePage() {
       )}
 
       {/* Quality Policy Section */}
-      <section id="quality" className="py-16 px-4 bg-white">
+      {/* <section id="quality" className="py-16 px-4 bg-white">
         <div className="container mx-auto">
           <div className="text-center mb-12">
             <h3 className="text-3xl sm:text-4xl font-bold text-blue-900 mb-4">Quality Policy</h3>
@@ -1251,7 +1093,7 @@ export default function HomePage() {
             </p>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Payment Policy Section */}
       {false && (
@@ -1344,52 +1186,6 @@ export default function HomePage() {
         </div>
       </section>
       )}
-
-      {/* FAQ Section */}
-      <section id="faq" className="py-16 px-4 bg-gradient-to-b from-blue-50 to-white">
-        <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <Badge className="bg-amber-500 text-white border-0 mb-4 px-3 py-1">FAQ</Badge>
-            <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-blue-900 mb-4">
-              Frequently Asked <span className="text-amber-600">Questions</span>
-            </h3>
-            <p className="text-blue-700 text-lg max-w-3xl mx-auto">
-              Everything buyers, importers and trade partners typically ask us about ordering, shipping and quality assurance.
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto">
-            <Accordion type="single" collapsible className="space-y-3">
-              {faqs.map((faq, idx) => (
-                <AccordionItem
-                  key={idx}
-                  value={`faq-${idx}`}
-                  className="bg-white rounded-xl border border-blue-100 shadow-sm hover:shadow-md transition-shadow px-5 sm:px-6"
-                >
-                  <AccordionTrigger className="text-left text-base sm:text-lg font-semibold text-blue-900 hover:text-amber-700 py-5">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-gray-700 leading-relaxed text-sm sm:text-base pb-5">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-
-            <div className="mt-10 text-center bg-gradient-to-r from-blue-900 to-blue-800 text-white rounded-2xl p-6 sm:p-8 shadow-lg">
-              <h4 className="text-2xl font-bold mb-2">Still have questions?</h4>
-              <p className="text-blue-100 mb-5">Our export team is happy to help with custom quotes, samples and any product-specific questions.</p>
-              <Button
-                size="lg"
-                className="bg-amber-500 hover:bg-amber-600 text-white"
-                onClick={() => scrollToSection("contact")}
-              >
-                Contact Our Team
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Contact Section */}
       <section id="contact" className="py-16 px-4 bg-white">

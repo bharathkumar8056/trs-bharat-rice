@@ -11,12 +11,12 @@ const navLinks: Array<{ label: string; href: string }> = [
   { label: "Quality Policy", href: "/#quality" },
   { label: "Certifications", href: "/certifications" },
   { label: "Blog", href: "/blog" },
-  { label: "FAQ", href: "/#faq" },
+  { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/#contact" },
 ]
 
 const productLinks = [
-  { label: "Rice Varieties", href: "/rice" },
+  // { label: "Rice Varieties", href: "/rice" },
   { label: "Basmati", href: "/rice?category=Basmati" },
   { label: "Non-Basmati", href: "/rice?category=Non-Basmati" },
 ]
@@ -83,7 +83,7 @@ export function SiteHeader() {
             <Link href="/blog" className="hover:text-amber-300 transition-colors">
               Blog
             </Link>
-            <Link href="/#faq" className="hover:text-amber-300 transition-colors">
+            <Link href="/faq" className="hover:text-amber-300 transition-colors">
               FAQ
             </Link>
             <Link href="/#contact" className="hover:text-amber-300 transition-colors">

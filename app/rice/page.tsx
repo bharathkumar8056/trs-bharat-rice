@@ -1,6 +1,7 @@
 "use client"
 import type React from "react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -47,6 +48,14 @@ function RiceCard({ rice }: { rice: Rice }) {
 
 export default function RiceVarietiesPage() {
   const [activeCategory, setActiveCategory] = useState<RiceCategory | "All">("All")
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    const category = searchParams.get("category")
+    if (category === "Basmati" || category === "Non-Basmati") {
+      setActiveCategory(category)
+    }
+  }, [searchParams])
 
   const displayed =
     activeCategory === "All"

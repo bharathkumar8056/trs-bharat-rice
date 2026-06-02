@@ -79,7 +79,7 @@ export default async function RiceDetailPage({ params }: { params: Promise<{ slu
               ))}
             </div>
 
-            <div className="bg-gradient-to-br from-blue-50 to-amber-50 border border-blue-100 rounded-xl p-5 mb-6">
+            {/* <div className="bg-gradient-to-br from-blue-50 to-amber-50 border border-blue-100 rounded-xl p-5 mb-6">
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div className="flex items-start gap-2">
                   <MapPin className="w-4 h-4 text-amber-600 mt-0.5 flex-shrink-0" />
@@ -96,7 +96,7 @@ export default async function RiceDetailPage({ params }: { params: Promise<{ slu
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             <div className="flex flex-col sm:flex-row gap-3">
               <Link href="/#contact" className="flex-1">
