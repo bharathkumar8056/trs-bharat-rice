@@ -5,18 +5,10 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import {
-  MessageCircle,
   Phone,
   Mail,
   MapPin,
   PhoneIcon as WhatsApp,
-  Menu,
-  X,
-  Send,
-  Instagram,
-  Facebook,
-  Linkedin,
-  Twitter,
   Check,
   Package,
   Truck,
@@ -26,6 +18,9 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { SiteHeader } from "@/components/site-header"
+import { SiteFooter } from "@/components/site-footer"
 import emailjs from "@emailjs/browser"
 // Custom hook for number animation
 const useCountUp = (end: number, duration = 2000, start = 0) => {
@@ -101,19 +96,7 @@ const AnimatedStat = ({
 }
 
 export default function HomePage() {
-  const [isChatOpen, setIsChatOpen] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  type ChatMessage = {
-    type: string
-    message: string
-    showOptions?: boolean
-  }
 
-  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
-    { type: "bot", message: "Hello! Welcome to TRS Bharat Global Solutions. How can I help you today?" },
-  ])
-  const [currentMessage, setCurrentMessage] = useState("")
-   
   // Contact form state
   const [formData, setFormData] = useState({
     name: "",
@@ -123,8 +106,6 @@ export default function HomePage() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
-  // Add this ref after the existing state declarations
-  const messagesEndRef = useRef<HTMLDivElement>(null)
   // Initialize EmailJS
   useEffect(() => {
     emailjs.init("nfgaFVXE8bbPQ9PAG") // Replace with your EmailJS public key
@@ -135,7 +116,6 @@ export default function HomePage() {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
     }
-    setIsMobileMenuOpen(false) // Close mobile menu after clicking
   }
 // Handle form input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -177,86 +157,134 @@ export default function HomePage() {
       setIsSubmitting(false)
     }
   }
-  // Predefined Q&A for the chatbot
-  const chatbotQA = [
+  // Frequently Asked Questions
+  const faqs = [
     {
-      question: "What are your lead times?",
-      answer: `We are committed to timely delivery and transparent communication for all export orders.
-
-Standard Lead Time:
-- Processing & Packing: 6–11 business days  
-- Dispatch & Shipping: 16–21 days (depending on destination port and logistics)  
-- Total Lead Time: 22–30 days from order confirmation
-
-Urgent/Express Orders:
-- Available on request (subject to additional charges and product readiness)
-
-Note: Lead times may vary based on order volume, seasonal demand, and shipping conditions. We provide a confirmed dispatch date upon final order confirmation.`,
-    },
-//     {
-//       question: "What about international orders?",
-//       answer: `International Orders:
-
-// - Minimum Order: 1 full container load (FCL)  
-//   - 20 ft Container: ~10–12 tons (for heavy goods like rice)  
-//   - 40 ft Container: ~24–25 tons (for bulk volume)
-
-// Mixed Product Orders:
-// - Allowed if total order meets minimum container load (e.g., 10 tons total)
-
-// Trial Orders / Samples:
-// - Small quantities (100–500 kg) available for new clients (paid samples + shipping)
-
-// Why MOQ Matters:
-// - Ensures cost-effective shipping  
-// - Helps maintain product quality and packaging standards`,
-//     },
-//     {
-//       question: "What is your shipping policy?",
-//       answer: `Shipping Policy
-
-// We ensure safe and timely delivery of your goods through trusted and efficient logistics partners.
-
-// Available Shipping Methods:
-// - Sea Freight – Most cost-effective for bulk shipments (20–45 days transit time)
-// - Air Freight – Fast delivery for urgent or smaller consignments (5–10 days)
-
-// Packaging:
-// - Export-standard packaging to prevent moisture, damage, and contamination
-// - Custom labeling and palletizing available upon request
-
-// Shipping Terms (Incoterms):
-// - We support FOB, CIF, CFR, and DDP based on customer preference
-// - Door-to-door delivery available on request
-
-// Export Documentation Provided:
-// - Commercial Invoice & Packing List  
-// - Certificate of Origin  
-// - Phytosanitary Certificate (if applicable)  
-// - Bill of Lading / Airway Bill  
-// - Other certificates as per destination country requirement
-
-// We aim to ensure a smooth and transparent shipping experience for all international clients.`,
-//     },
-    {
-      question: "What products do you offer?",
-      answer: `We specialize in exporting premium quality agricultural products from India, including:
-
-1. Rice - Various premium varieties including Basmati, Ponni, IR-20 , Matta , Sambha , Kolam Rice and organic options
-All our products meet international quality standards and are sourced from certified farms across India.`,
+      question: "What is Non-Basmati Rice?",
+      answer:
+        "Non-Basmati rice refers to rice varieties grown in India that are not aromatic Basmati. These include medium and short-grain varieties widely used for daily consumption across Asia, Africa, and the Middle East.",
     },
     {
-      question: "How can I place an order?",
-      answer: `To place an order with TRS Bharat Global Solutions:
-
-1. Contact us via email at info@trsbharatexports.com or call us at +91 90250 71760, +91 89390 38352
-2. Specify your product requirements, quantity, and delivery location
-3. We'll provide a detailed quotation including pricing and shipping options
-4. Upon agreement, we'll send an official order confirmation
-5. Payment is processed as per our payment policy
-6. Order processing begins after payment confirmation
-
-Our team will guide you through each step of the process to ensure a smooth experience.`,
+      question: "Which types of Non-Basmati Rice do you export?",
+      answer:
+        "We export popular Indian varieties such as Sona Masoori, IR-64, PR-11/PR-14, Ponni, Swarna, and 100% Broken Rice based on buyer requirements.",
+    },
+    {
+      question: "From which regions in India is your rice sourced?",
+      answer:
+        "Our rice is sourced from leading paddy belts such as Tamil Nadu, Andhra Pradesh, Telangana, Chhattisgarh, Odisha, Punjab, Haryana, and West Bengal.",
+    },
+    {
+      question: "What are the common specifications for non-basmati you offer?",
+      answer:
+        "Typical specifications include: Moisture 12–14%; Broken 5%, 10%, 25%, 100%; Sortex Cleaned; Well milled and polished; Crop: Latest harvest.",
+    },
+    {
+      question: "Is your rice Sortex cleaned?",
+      answer:
+        "Yes, all rice is processed through advanced Sortex machines to ensure uniform grain quality and removal of impurities.",
+    },
+    {
+      question: "What packaging options do you provide?",
+      answer:
+        "We offer 5 kg, 10 kg, 25 kg, 50 kg PP bags, BOPP laminated bags, and custom private-label packaging. Also, Jute bags are available.",
+    },
+    {
+      question: "Do you provide private labeling?",
+      answer:
+        "Yes, we support private labeling with customized bag design and branding as per buyer requirements.",
+    },
+    {
+      question: "What certifications do you provide with the shipment?",
+      answer:
+        "We provide: Phytosanitary Certificate, Fumigation Certificate, Certificate of Origin, SGS/Intertek inspection (if required), and Health Certificate (if required).",
+    },
+    {
+      question: "What is the minimum order quantity (MOQ)?",
+      answer:
+        "MOQ is typically 1 x 20 ft container, but trial orders can be discussed.",
+    },
+    {
+      question: "What is the container loading capacity?",
+      answer:
+        "20 ft container: 24–26 MT. 40 ft container: 26–28 MT (depending on packing).",
+    },
+    {
+      question: "What are your payment terms?",
+      answer:
+        "We accept: Advance Payment (T/T) — 100% before shipment (commonly for small or first-time orders); 50% Advance + 50% Before Shipment (recommended for new clients); Letter of Credit (L/C) — Irrevocable L/C at sight for large-volume orders.",
+    },
+    {
+      question: "How do you ensure quality before shipment?",
+      answer:
+        "Every lot undergoes pre-shipment quality checks, moisture testing, and sortex verification before container stuffing.",
+    },
+    {
+      question: "What is the shelf life of Non-Basmati rice?",
+      answer: "Properly stored rice has a shelf life of 12–24 months.",
+    },
+    {
+      question: "Is fumigation done before shipment?",
+      answer: "Yes, fumigation is mandatory and done as per importing country norms.",
+    },
+    {
+      question: "Can you supply rice as per specific country standards?",
+      answer: "Yes, we customize specifications as per African, Gulf, and Asian country import standards.",
+    },
+    {
+      question: "Do you provide samples before order confirmation?",
+      answer: "Yes, samples can be couriered for quality approval.",
+    },
+    {
+      question: "What is the average lead time for shipment?",
+      answer: "Usually 10–15 days from order confirmation and payment/LC.",
+    },
+    {
+      question: "Do you handle export documentation?",
+      answer: "Yes, we handle complete export documentation and customs clearance from India.",
+    },
+    {
+      question: "What makes Indian Non-Basmati rice preferred globally?",
+      answer:
+        "Indian rice is known for: Consistent grain size, Good cooking quality, Competitive pricing, and Reliable supply.",
+    },
+    {
+      question: "Can you supply 100% broken rice for industrial use?",
+      answer:
+        "Yes, we export 100% broken rice for breweries, animal feed, and industrial food processing.",
+    },
+    {
+      question: "Do you offer CIF and FOB pricing?",
+      answer: "Yes, we quote on FOB, CFR, and CIF basis to all major ports.",
+    },
+    {
+      question: "How is the rice stored before export?",
+      answer: "Rice is stored in hygienic, moisture-controlled warehouses to maintain quality.",
+    },
+    {
+      question: "How can a buyer place an order with you?",
+      answer:
+        "Buyers can contact us with their required specifications, quantity, destination port, and preferred terms. We will share a formal quotation and proceed accordingly.",
+    },
+    {
+      question: "Do you offer customized grain length and broken percentage?",
+      answer:
+        "Yes, we can customize grain length, broken percentage, polishing level, and color sorting based on buyer specifications.",
+    },
+    {
+      question: "Can you arrange third-party inspection before shipment?",
+      answer:
+        "Yes, third-party inspections by SGS, Intertek, Bureau Veritas, or buyer-appointed agencies can be arranged.",
+    },
+    {
+      question: "Can you supply rice throughout the year?",
+      answer:
+        "Yes, we maintain continuous sourcing and stock management to ensure year-round supply.",
+    },
+    {
+      question: "Do you support long-term supply contracts?",
+      answer:
+        "Yes, we welcome long-term business partnerships and annual supply agreements with international buyers.",
     },
   ]
 
@@ -287,288 +315,65 @@ Our team will guide you through each step of the process to ensure a smooth expe
     }, */
   ]
 
-  const handleSendMessage = (message = currentMessage) => {
-    if (message.trim()) {
-      setChatMessages([...chatMessages, { type: "user", message }])
-
-      // Check if the message matches any predefined questions
-      const matchedQA = chatbotQA.find(
-        (qa) =>
-          qa.question.toLowerCase() === message.toLowerCase() ||
-          message.toLowerCase().includes(qa.question.toLowerCase()),
-      )
-
-      setTimeout(() => {
-        if (matchedQA) {
-          setChatMessages((prev) => [...prev, { type: "bot", message: matchedQA.answer }])
-        } else {
-          setChatMessages((prev) => [
-            ...prev,
-            {
-              type: "bot",
-              message:
-                "Thank you for your message. Our team will get back to you shortly with detailed information about our products and services.",
-            },
-          ])
-        }
-
-        // Add predefined questions again after answering
-        setTimeout(() => {
-          setChatMessages((prev) => [
-            ...prev,
-            {
-              type: "bot",
-              message: "Is there anything else you'd like to know?",
-              showOptions: true,
-            },
-          ])
-        }, 1000)
-      }, 1000)
-
-      setCurrentMessage("")
-    }
-  }
-
-  // Show predefined questions when chatbot opens
-  useEffect(() => {
-    if (isChatOpen && chatMessages.length === 1) {
-      setTimeout(() => {
-        setChatMessages([
-          ...chatMessages,
-          {
-            type: "bot",
-            message: "Here are some frequently asked questions you might be interested in:",
-            showOptions: true,
-          },
-        ])
-      }, 500)
-    }
-  }, [isChatOpen])
-
-  // Add this useEffect after the existing useEffects
-  useEffect(() => {
-    if (isChatOpen) {
-      // Disable body scroll when chatbot is open
-      document.body.style.overflow = "hidden"
-    } else {
-      // Re-enable body scroll when chatbot is closed
-      document.body.style.overflow = "unset"
-    }
-
-    // Cleanup function to ensure scroll is re-enabled
-    return () => {
-      document.body.style.overflow = "unset"
-    }
-  }, [isChatOpen])
-
-  // Add this useEffect to handle auto-scrolling
-  useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
-    }
-  }, [chatMessages])
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-amber-50">
+    <div suppressHydrationWarning className="min-h-screen bg-gradient-to-br from-blue-50 to-amber-50">
       {/* Header */}
-      <header className="bg-gradient-to-r from-blue-900 to-blue-800 text-white shadow-lg sticky top-0 z-40">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            {/* Logo Space */}
-            <div className="flex items-center space-x-3">
-              {/* Updated Logo */}
-              <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center shadow-md">
-                <img
-                  src="/assets/logo-trs.jpeg"
-                  alt="TRS Bharat Global Solutions Logo"
-                  className="w-10 h-10 object-contain"
-                />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold">TRS Bharat Global Solutions</h1>
-                <p className="text-blue-200 text-sm">Premium Export Solutions</p>
-              </div>
-            </div>
+      <SiteHeader />
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex space-x-6">
-              <button onClick={() => scrollToSection("home")} className="hover:text-amber-300 transition-colors">
-                Home
-              </button>
-              <button onClick={() => scrollToSection("about")} className="hover:text-amber-300 transition-colors">
-                About us
-              </button>
-              <button onClick={() => scrollToSection("products")} className="hover:text-amber-300 transition-colors">
-                Product
-              </button>
-              {/* <a
-                href="/flowers"
-                className="hover:text-amber-300 transition-colors font-semibold text-amber-300"
+      {/* Hero Section — Full-width Banner Video with Overlaid Text */}
+      <section id="home" className="relative w-full h-[80vh] min-h-[650px] overflow-hidden">
+        {/* Background Video */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          poster="/assets/banner.jpg"
+        >
+          {/* TODO: replace with final hero banner video path */}
+          <source src="/assets/banner-video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        {/* Dark gradient overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-950/85 via-blue-900/65 to-blue-900/40" />
+
+        {/* Overlaid Content */}
+        <div className="relative z-10 container mx-auto px-4 h-full flex items-center">
+          <div className="max-w-3xl space-y-6">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-white drop-shadow-lg">
+              <span className="text-white">Premium </span>
+              <span className="text-amber-400">Global</span>
+              <br />
+              <span className="text-white">Solutions</span>
+            </h2>
+
+            <p className="text-blue-50 text-base sm:text-lg leading-relaxed drop-shadow">
+              At TRS Bharat Global Solutions, we are your trusted partner for premium-quality rice. We specialize in connecting the richness of Indian agriculture to global markets with
+              a strong focus on quality, consistency, and reliability. Our products are handpicked, processed with
+              care, and meet international food-grade certifications. With hassle-free export services, fast
+              processing, and secure global delivery, we ensure smooth end-to-end logistics for every order. We
+              believe in building long-term trade relationships based on trust, transparency, and performance. Backed
+              by secure payment systems and ethical practices, we are committed to excellence in every grain. Choose TRS Bharat — where Indian quality meets global standards.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button
+                size="lg"
+                className="bg-amber-500 hover:bg-amber-600 text-white px-8 py-3 text-lg shadow-lg"
+                onClick={() => scrollToSection("products")}
               >
-                Flower Varieties
-              </a>
-              <button onClick={() => scrollToSection("moq")} className="hover:text-amber-300 transition-colors">
-                MOQ
-              </button>
-              <button onClick={() => scrollToSection("shipping")} className="hover:text-amber-300 transition-colors">
-                Shipping
-              </button> */}
-              <button onClick={() => scrollToSection("quality")} className="hover:text-amber-300 transition-colors">
-                Quality Policy
-              </button>
-              <a href="/certifications" className="hover:text-amber-300 transition-colors">
-                Certifications
-              </a>
-              {/* <button onClick={() => scrollToSection("payment")} className="hover:text-amber-300 transition-colors">
-                Payment
-              </button> */}
-              <button onClick={() => scrollToSection("contact")} className="hover:text-amber-300 transition-colors">
-                Contact
-              </button>
-              <a href="/blog" className="hover:text-amber-300 transition-colors">
-                Blog
-              </a>
-            </nav>
-
-            {/* Mobile Menu Button */}
-            <Button
-              variant="ghost"
-              size="sm"
-              className="md:hidden text-white hover:bg-blue-800"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              {isMobileMenuOpen ? <X /> : <Menu />}
-            </Button>
-          </div>
-
-          {/* Mobile Navigation */}
-          {isMobileMenuOpen && (
-            <nav className="md:hidden mt-4 pb-4 border-t border-blue-700 pt-4">
-              <div className="flex flex-col space-y-2">
-                <button
-                  onClick={() => scrollToSection("home")}
-                  className="hover:text-amber-300 transition-colors py-2 text-left"
-                >
-                  Home
-                </button>
-                <button
-                  onClick={() => scrollToSection("about")}
-                  className="hover:text-amber-300 transition-colors py-2 text-left"
-                >
-                  About us
-                </button>
-                <button
-                  onClick={() => scrollToSection("products")}
-                  className="hover:text-amber-300 transition-colors py-2 text-left"
-                >
-                  Product
-                </button>
-                {/* <a
-                  href="/flowers"
-                  className="hover:text-amber-300 transition-colors py-2 text-left block font-semibold text-amber-300"
-                >
-                  Flower Varieties
-                </a>
-                <button
-                  onClick={() => scrollToSection("moq")}
-                  className="hover:text-amber-300 transition-colors py-2 text-left"
-                >
-                  MOQ
-                </button>
-                <button
-                  onClick={() => scrollToSection("shipping")}
-                  className="hover:text-amber-300 transition-colors py-2 text-left"
-                >
-                  Shipping
-                </button> */}
-                <button
-                  onClick={() => scrollToSection("quality")}
-                  className="hover:text-amber-300 transition-colors py-2 text-left"
-                >
-                  Quality Policy
-                </button>
-                <a
-                  href="/certifications"
-                  className="hover:text-amber-300 transition-colors py-2 text-left"
-                >
-                  Certifications
-                </a>
-                {/* <button
-                  onClick={() => scrollToSection("payment")}
-                  className="hover:text-amber-300 transition-colors py-2 text-left"
-                >
-                  Payment
-                </button> */}
-                <button
-                  onClick={() => scrollToSection("contact")}
-                  className="hover:text-amber-300 transition-colors py-2 text-left"
-                >
-                  Contact
-                </button>
-                <a
-                  href="/blog"
-                  className="hover:text-amber-300 transition-colors py-2 text-left"
-                >
-                  Blog
-                </a>
-              </div>
-            </nav>
-          )}
-        </div>
-      </header>
-
-      {/* Hero Section */}
-      {/* Hero Section with Animated Video Background */}
-      {/* Hero Section */}
-      <section id="home" className="py-16 px-4 bg-gradient-to-br from-blue-50 to-white">
-        <div className="container mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Left Content */}
-            <div className="space-y-6">
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
-                <span className="text-blue-900">Premium </span>
-                <span className="text-amber-600">Global</span>
-                <br />
-                <span className="text-blue-900">Solutions</span>
-              </h2>
-
-              <p className="text-blue-700 text-lg leading-relaxed">
-                At TRS Bharat Global Solutions, we are your trusted partner for premium-quality rice. We specialize in connecting the richness of Indian agriculture to global markets with
-                a strong focus on quality, consistency, and reliability. Our products are handpicked, processed with
-                care, and meet international food-grade certifications. With hassle-free export services, fast
-                processing, and secure global delivery, we ensure smooth end-to-end logistics for every order. We
-                believe in building long-term trade relationships based on trust, transparency, and performance. Backed
-                by secure payment systems and ethical practices, we are committed to excellence in every grain. Choose TRS Bharat — where Indian quality meets global standards.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button
-                  size="lg"
-                  className="bg-blue-900 hover:bg-blue-800 text-white px-8 py-3 text-lg"
-                  onClick={() => scrollToSection("products")}
-                >
-                  Explore Products
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-2 border-amber-600 text-amber-700 hover:bg-amber-50 px-8 py-3 text-lg font-medium bg-transparent"
-                  onClick={() => scrollToSection("contact")}
-                >
-                  Contact Us
-                </Button>
-              </div>
-            </div>
-
-            {/* Right Image */}
-            <div className="flex justify-center">
-              <div className="w-full max-w-lg">
-                <img
-                  src="/assets/logo-trs.jpeg"
-                  alt="Global Shipping and Export Services"
-                  className="w-full h-auto rounded-lg shadow-xl object-cover"
-                />
-              </div>
+                Explore Products
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-2 border-white text-white bg-white/10 hover:bg-white hover:text-blue-900 px-8 py-3 text-lg font-medium backdrop-blur-sm"
+                onClick={() => scrollToSection("contact")}
+              >
+                Contact Us
+              </Button>
             </div>
           </div>
         </div>
@@ -593,7 +398,7 @@ Our team will guide you through each step of the process to ensure a smooth expe
             <h3 className="text-3xl sm:text-4xl font-bold text-blue-900 mb-4">About TRS Bharat Global Solutions</h3>
             <p className="text-blue-700 text-lg max-w-3xl mx-auto">
               We are a leading exporter of premium agricultural products from India, committed to delivering the highest
-              quality fresh flowers ,rice, coconut, and cashew nuts products to global markets.
+              quality rice varieties to global markets.
             </p>
           </div>
 
@@ -964,17 +769,17 @@ Our team will guide you through each step of the process to ensure a smooth expe
       <section className="py-20 px-4 bg-gradient-to-br from-blue-900 to-blue-800 text-white">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h3 className="text-4xl sm:text-5xl font-bold mb-6">
+            {/* <h3 className="text-4xl sm:text-5xl font-bold mb-6">
               Watch Our <span className="text-amber-400">Journey</span>
             </h3>
             <p className="text-blue-100 text-xl max-w-4xl mx-auto leading-relaxed">
               Experience the excellence of TRS Bharat Global Solutions through our comprehensive video showcase. From
               farm to global markets, witness our commitment to quality and innovation.
-            </p>
+            </p> */}
           </div>
 
           {/* Main Featured Video */}
-          <div className="mb-16">
+          {/* <div className="mb-16">
             <div className="max-w-6xl mx-auto">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <video
@@ -998,10 +803,10 @@ Our team will guide you through each step of the process to ensure a smooth expe
                     <Badge className="bg-blue-600 text-white px-4 py-2 text-sm">50+ Countries</Badge>
                     <Badge className="bg-green-600 text-white px-4 py-2 text-sm">Premium Quality</Badge>
                   </div> */}
-                </div>
+                {/* </div>
               </div>
-            </div>
-          </div>
+            </div> */}
+          {/* </div> */} 
 
           {/* Video Grid - Convert to Image Grid */}
           {/* <div className="grid md:grid-cols-3 gap-8 mb-12">
@@ -1540,6 +1345,52 @@ Our team will guide you through each step of the process to ensure a smooth expe
       </section>
       )}
 
+      {/* FAQ Section */}
+      <section id="faq" className="py-16 px-4 bg-gradient-to-b from-blue-50 to-white">
+        <div className="container mx-auto">
+          <div className="text-center mb-12">
+            <Badge className="bg-amber-500 text-white border-0 mb-4 px-3 py-1">FAQ</Badge>
+            <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-blue-900 mb-4">
+              Frequently Asked <span className="text-amber-600">Questions</span>
+            </h3>
+            <p className="text-blue-700 text-lg max-w-3xl mx-auto">
+              Everything buyers, importers and trade partners typically ask us about ordering, shipping and quality assurance.
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <Accordion type="single" collapsible className="space-y-3">
+              {faqs.map((faq, idx) => (
+                <AccordionItem
+                  key={idx}
+                  value={`faq-${idx}`}
+                  className="bg-white rounded-xl border border-blue-100 shadow-sm hover:shadow-md transition-shadow px-5 sm:px-6"
+                >
+                  <AccordionTrigger className="text-left text-base sm:text-lg font-semibold text-blue-900 hover:text-amber-700 py-5">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-gray-700 leading-relaxed text-sm sm:text-base pb-5">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+
+            <div className="mt-10 text-center bg-gradient-to-r from-blue-900 to-blue-800 text-white rounded-2xl p-6 sm:p-8 shadow-lg">
+              <h4 className="text-2xl font-bold mb-2">Still have questions?</h4>
+              <p className="text-blue-100 mb-5">Our export team is happy to help with custom quotes, samples and any product-specific questions.</p>
+              <Button
+                size="lg"
+                className="bg-amber-500 hover:bg-amber-600 text-white"
+                onClick={() => scrollToSection("contact")}
+              >
+                Contact Our Team
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section id="contact" className="py-16 px-4 bg-white">
         <div className="container mx-auto">
@@ -1676,92 +1527,7 @@ Our team will guide you through each step of the process to ensure a smooth expe
       </section>
 
       {/* Footer */}
-      <footer className="bg-blue-900 text-white py-8 px-4">
-        <div className="container mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-center mb-8">
-            <div className="flex items-center space-x-3 mb-4 md:mb-0">
-{/*               <div className="w-8 h-8 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center">
-                <span className="text-blue-900 font-bold">T</span> */}
-              <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-                <img
-                  src="/assets/logo-trs.jpeg"
-                  alt="TRS Bharat Global Solutions Logo"
-                  className="w-6 h-6 object-contain"
-                />
-              </div>
-              <span className="text-xl font-bold">TRS Bharat Global Solutions</span>
-            </div>
-          </div>
-          <div className="border-t border-blue-800 pt-6 text-center">
-            <p className="text-blue-200 mb-2">Premium Export Solutions • Connecting India to the World</p>
-            <p className="text-blue-300 text-sm">© 2025 TRS Bharat Global Solutions. All rights reserved.</p>
-            <div className="mt-6 flex justify-center items-center space-x-4">
-              <a
-                href="https://www.instagram.com/trsbharatexports/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="bg-gradient-to-br from-amber-400 to-amber-600 p-2.5 rounded-full hover:opacity-90 hover:scale-110 transition-all"
-              >
-                <Instagram className="w-5 h-5 text-blue-900" />
-              </a>
-              <a
-                href="https://www.facebook.com/profile.php?id=61590417239122"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="bg-gradient-to-br from-amber-400 to-amber-600 p-2.5 rounded-full hover:opacity-90 hover:scale-110 transition-all"
-              >
-                <Facebook className="w-5 h-5 text-blue-900" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/trs-bharat-global-solutions?utm"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="bg-gradient-to-br from-amber-400 to-amber-600 p-2.5 rounded-full hover:opacity-90 hover:scale-110 transition-all"
-              >
-                <Linkedin className="w-5 h-5 text-blue-900" />
-              </a>
-              <a
-                href="https://x.com/TRSBharatExport"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter"
-                className="bg-gradient-to-br from-amber-400 to-amber-600 p-2.5 rounded-full hover:opacity-90 hover:scale-110 transition-all"
-              >
-                <Twitter className="w-5 h-5 text-blue-900" />
-              </a>
-            </div>
-            <div className="mt-4 flex flex-col md:flex-row justify-center items-center space-y-3 md:space-y-0 md:space-x-8">
-              <div className="flex items-center space-x-2">
-                <p className="text-amber-300 text-base font-medium">Developed By</p>
-                <p className="text-white text-base font-semibold">BKB Incorporation</p>
-                <a
-                  href="https://www.instagram.com/bkb_incorporation/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-gradient-to-br from-amber-400 to-amber-600 p-1.5 rounded-full hover:opacity-90 transition-opacity"
-                >
-                  <Instagram className="w-4 h-4 text-blue-900" />
-                </a>
-              </div>
-              <div className="flex items-center space-x-2">
-                <p className="text-amber-300 text-base font-medium">In Association with</p>
-                <p className="text-white text-base font-semibold">Brandspark</p>
-                <a
-                  href="https://www.instagram.com/brandsparksm/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-gradient-to-br from-amber-400 to-amber-600 p-1.5 rounded-full hover:opacity-90 transition-opacity"
-                >
-                  <Instagram className="w-4 h-4 text-blue-900" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
 
       {/* Floating Action Buttons - Fixed Position */}
       <div className="fixed bottom-4 right-4 z-50 flex flex-col space-y-3">
@@ -1774,105 +1540,7 @@ Our team will guide you through each step of the process to ensure a smooth expe
         >
           <WhatsApp className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
         </a>
-
-        {/* Chat Button */}
-        {!isChatOpen && (
-          <Button
-            onClick={() => setIsChatOpen(true)}
-            className="rounded-full w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-blue-900 to-blue-800 hover:from-blue-800 hover:to-blue-700 shadow-lg p-0"
-          >
-            <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
-          </Button>
-        )}
       </div>
-
-      {/* Chatbot Card - Properly Fixed */}
-      {isChatOpen && (
-        <div className="fixed inset-0 z-50 flex items-end justify-end p-4 pointer-events-none">
-          <Card className="w-full max-w-sm sm:max-w-md lg:max-w-lg h-[80vh] max-h-[600px] shadow-2xl border-blue-200 pointer-events-auto mb-16 sm:mb-20">
-            <CardHeader className="bg-gradient-to-r from-blue-900 to-blue-800 text-white rounded-t-lg p-3 sm:p-4 flex-shrink-0">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                    <MessageCircle className="w-4 h-4 text-blue-900" />
-                  </div>
-                  <div>
-                    <CardTitle className="text-base sm:text-lg">TRS Support</CardTitle>
-                    <p className="text-blue-200 text-xs sm:text-sm">Online now</p>
-                  </div>
-                </div>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setIsChatOpen(false)}
-                  className="text-white hover:bg-blue-800 p-1 rounded-full"
-                >
-                  <X className="w-4 h-4" />
-                </Button>
-              </div>
-            </CardHeader>
-
-            <CardContent className="p-0 flex flex-col h-full">
-              {/* Messages Area */}
-              <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 bg-gray-50">
-                {chatMessages.map((msg, index) => (
-                  <div key={index} className={`flex ${msg.type === "user" ? "justify-end" : "justify-start"}`}>
-                    <div
-                      className={`max-w-[85%] p-2 sm:p-3 rounded-lg text-sm shadow-sm ${
-                        msg.type === "user"
-                          ? "bg-blue-900 text-white rounded-br-none"
-                          : "bg-white text-blue-900 border border-blue-100 rounded-bl-none"
-                      }`}
-                    >
-                      <p className="whitespace-pre-line break-words leading-relaxed">{msg.message}</p>
-
-                      {msg.showOptions && (
-                        <div className="mt-3 space-y-2">
-                          {chatbotQA.map((qa, idx) => (
-                            <Button
-                              key={idx}
-                              variant="outline"
-                              size="sm"
-                              onClick={() => handleSendMessage(qa.question)}
-                              className="text-xs w-full justify-start text-left bg-blue-50 hover:bg-blue-100 border-blue-200 text-blue-900 p-2 h-auto min-h-[2rem] rounded-md transition-colors"
-                            >
-                              <span className="break-words">{qa.question}</span>
-                            </Button>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-                {/* Invisible div to scroll to */}
-                <div ref={messagesEndRef} />
-              </div>
-
-              {/* Input Area */}
-              <div className="p-3 sm:p-4 border-t border-gray-200 bg-white flex-shrink-0">
-                <div className="flex space-x-2">
-                  <Input
-                    placeholder="Type your message..."
-                    value={currentMessage}
-                    onChange={(e) => setCurrentMessage(e.target.value)}
-                    onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
-                    className="flex-1 border-blue-200 focus:border-amber-500 text-sm rounded-full px-4"
-                  />
-                  <Button
-                    onClick={() => handleSendMessage()}
-                    size="sm"
-                    className="bg-blue-900 hover:bg-blue-800 px-3 rounded-full shadow-md"
-                    disabled={!currentMessage.trim()}
-                  >
-                    <Send className="w-4 h-4" />
-                  </Button>
-                </div>
-                <p className="text-xs text-gray-500 mt-2 text-center">Powered by TRS Bharat Global Solutions</p>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
     </div>
   )
 }

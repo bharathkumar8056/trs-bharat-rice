@@ -1,11 +1,14 @@
 "use client"
 import type React from "react"
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Link from "next/link"
-import riceByState, { basmati, type Rice } from "@/lib/rice"
+import { ArrowRight } from "lucide-react"
+import { riceVarieties, basmatiVarieties, nonBasmatiVarieties, type Rice, type RiceCategory } from "@/lib/rice"
+import { SiteHeader } from "@/components/site-header"
+import { SiteFooter } from "@/components/site-footer"
 
 const fallbackImage = (name: string) =>
   `data:image/svg+xml;utf8,${encodeURIComponent(
@@ -14,163 +17,120 @@ const fallbackImage = (name: string) =>
 
 function RiceCard({ rice }: { rice: Rice }) {
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300 border-blue-200">
-      <div className="relative w-full h-56 bg-gray-100 overflow-hidden">
-        <img
-          src={rice.image}
-          alt={rice.name}
-          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-          onError={(e) => {
-            const img = e.target as HTMLImageElement
-            img.src = fallbackImage(rice.name)
-          }}
-        />
-      </div>
-      <CardHeader>
-        <CardTitle className="text-lg text-blue-900">{rice.name}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <p className="text-sm text-gray-600 mb-3 leading-relaxed">{rice.description}</p>
-        <div className="space-y-1 text-sm">
-          {rice.origin && (
-            <p className="text-blue-700">
-              <span className="font-semibold">Origin:</span> {rice.origin}
-            </p>
-          )}
-          {rice.minOrder && (
-            <p className="text-blue-700">
-              <span className="font-semibold">Min Order:</span> {rice.minOrder}
-            </p>
-          )}
+    <Link href={`/rice/${rice.slug}`} className="group block">
+      <Card className="overflow-hidden border border-blue-100 hover:border-amber-400 hover:shadow-2xl transition-all duration-300 h-full bg-white">
+        <div className="relative w-full h-56 bg-gradient-to-br from-amber-50 to-blue-50 overflow-hidden">
+          <img
+            src={rice.image}
+            alt={rice.name}
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+            onError={(e) => {
+              const img = e.target as HTMLImageElement
+              img.src = fallbackImage(rice.name)
+            }}
+          />
+          <Badge className="absolute top-3 left-3 bg-amber-600 text-white border-0 shadow-md">{rice.category}</Badge>
         </div>
-      </CardContent>
-    </Card>
+        <CardContent className="p-5">
+          <h3 className="text-xl font-bold text-blue-900 mb-1 group-hover:text-amber-700 transition-colors">{rice.name}</h3>
+          <p className="text-amber-700 text-xs font-medium uppercase tracking-wide mb-3">{rice.tagline}</p>
+          <p className="text-sm text-gray-600 leading-relaxed line-clamp-3 mb-4">{rice.shortDescription}</p>
+          <div className="flex items-center justify-between pt-3 border-t border-blue-50">
+            <span className="text-xs text-blue-600 font-medium">View Details</span>
+            <ArrowRight className="w-4 h-4 text-amber-600 group-hover:translate-x-1 transition-transform" />
+          </div>
+        </CardContent>
+      </Card>
+    </Link>
   )
 }
 
 export default function RiceVarietiesPage() {
+  const [activeCategory, setActiveCategory] = useState<RiceCategory | "All">("All")
+
+  const displayed =
+    activeCategory === "All"
+      ? riceVarieties
+      : activeCategory === "Basmati"
+        ? basmatiVarieties
+        : nonBasmatiVarieties
+
+  const categories: Array<RiceCategory | "All"> = ["All", "Basmati", "Non-Basmati"]
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    <div suppressHydrationWarning className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       {/* Header */}
-      <header className="bg-gradient-to-r from-blue-900 to-blue-800 text-white shadow-lg sticky top-0 z-40">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center shadow-md">
-                <img
-                  src="/assets/logo-trs.jpeg"
-                  alt="TRS Bharat Global Solutions Logo"
-                  className="w-10 h-10 object-contain"
-                />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold">TRS Bharat Global Solutions</h1>
-                <p className="text-blue-200 text-sm">Premium Export Solutions</p>
-              </div>
-            </div>
-            <Link href="/">
-              <Button variant="outline" className="text-black border-white hover:bg-gray-100">
-                Back to Home
-              </Button>
-            </Link>
-          </div>
+      <SiteHeader />
+
+      {/* Banner */}
+      <section className="relative w-full h-[260px] sm:h-[340px] lg:h-[420px] overflow-hidden">
+        <img
+          src="/assets/product-banner.jpg"
+          alt="Premium Indian Rice Varieties"
+          className="absolute inset-0 w-full h-full object-cover"
+          onError={(e) => {
+            const img = e.target as HTMLImageElement
+            img.src = fallbackImage("Rice Varieties")
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-blue-900/50 to-amber-900/30" />
+        <div className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center">
+          <Badge className="bg-amber-500 text-white border-0 w-fit mb-4 px-3 py-1">Our Catalog</Badge>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white drop-shadow-lg max-w-3xl leading-tight">
+            Premium Indian <span className="text-amber-300">Rice Varieties</span>
+          </h1>
+          <p className="text-blue-100 text-lg mt-4 max-w-2xl drop-shadow">
+            From the aromatic Basmati of the Himalayan foothills to the heritage rices of South India — explore our full export-grade catalog.
+          </p>
         </div>
-      </header>
+      </section>
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-12">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-blue-900 mb-4">Rice Varieties</h1>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Explore our premium collection of rice varieties sourced from across India. From the aromatic Basmati to
-            regional specialties of Tamil Nadu, Kerala, Karnataka, and Andhra Pradesh — each variety meets international
-            quality standards.
-          </p>
+        {/* Category Tabs */}
+        <div className="flex justify-center mb-10">
+          <div className="inline-flex flex-wrap gap-2 bg-blue-50 p-1.5 rounded-xl border border-blue-100 shadow-sm">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-5 sm:px-8 py-2.5 rounded-lg text-sm sm:text-base font-semibold transition-all ${
+                  activeCategory === cat
+                    ? "bg-gradient-to-r from-blue-900 to-blue-800 text-white shadow-md"
+                    : "text-blue-800 hover:bg-white"
+                }`}
+              >
+                {cat}
+                <span className="ml-2 text-xs opacity-75">
+                  ({cat === "All" ? riceVarieties.length : cat === "Basmati" ? basmatiVarieties.length : nonBasmatiVarieties.length})
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* Featured: Basmati */}
-        <section className="mb-16">
-          <div className="flex items-center gap-3 mb-6">
-            <Badge className="bg-amber-600 text-white px-3 py-1">Featured</Badge>
-            <h2 className="text-3xl font-bold text-blue-900">Basmati Rice</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="md:col-span-1">
-              <RiceCard rice={basmati} />
-            </div>
-            <div className="md:col-span-2 bg-gradient-to-br from-blue-50 to-amber-50 rounded-lg p-6 shadow-sm border border-blue-100">
-              <h3 className="text-2xl font-bold text-blue-900 mb-3">The King of Rice</h3>
-              <p className="text-blue-700 leading-relaxed mb-4">
-                Basmati rice is renowned worldwide for its distinctive aroma, delicate flavor, and long, slender grains
-                that elongate further when cooked. Sourced from the foothills of the Himalayas and aged to perfection,
-                our Basmati rice is the preferred choice for biryanis, pilafs, and gourmet cuisine across the globe.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <Badge variant="secondary" className="bg-amber-100 text-amber-800">Long Grain</Badge>
-                <Badge variant="secondary" className="bg-amber-100 text-amber-800">Aromatic</Badge>
-                <Badge variant="secondary" className="bg-amber-100 text-amber-800">Aged Premium</Badge>
-                <Badge variant="secondary" className="bg-amber-100 text-amber-800">Export Grade</Badge>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Varieties by State - Sliding Tabs */}
-        <section className="mb-16">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-blue-900 mb-2">Regional Varieties</h2>
-            <p className="text-blue-700 max-w-2xl mx-auto">
-              Browse our state-wise collection of premium Indian rice varieties.
-            </p>
-          </div>
-
-          <Tabs defaultValue={riceByState[0].state} className="w-full">
-            <TabsList className="grid grid-cols-2 sm:grid-cols-4 mb-8 w-full h-auto bg-blue-50 p-1 rounded-lg">
-              {riceByState.map((stateBlock) => (
-                <TabsTrigger
-                  key={stateBlock.state}
-                  value={stateBlock.state}
-                  className="text-xs sm:text-sm py-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-900 data-[state=active]:to-blue-800 data-[state=active]:text-white"
-                >
-                  {stateBlock.state}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-
-            {riceByState.map((stateBlock) => (
-              <TabsContent
-                key={stateBlock.state}
-                value={stateBlock.state}
-                className="bg-white rounded-lg shadow-sm border border-blue-100 p-6"
-              >
-                <div className="mb-6">
-                  <h3 className="text-2xl font-bold text-blue-900 mb-2">{stateBlock.state}</h3>
-                  <p className="text-blue-700 max-w-3xl">{stateBlock.description}</p>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {stateBlock.varieties.map((rice) => (
-                    <RiceCard key={rice.slug} rice={rice} />
-                  ))}
-                </div>
-              </TabsContent>
-            ))}
-          </Tabs>
-        </section>
+        {/* Rice Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {displayed.map((rice) => (
+            <RiceCard key={rice.slug} rice={rice} />
+          ))}
+        </div>
 
         {/* Call to Action */}
-        <div className="bg-gradient-to-r from-blue-900 to-blue-800 text-white rounded-lg p-8 text-center">
+        <div className="mt-16 bg-gradient-to-r from-blue-900 to-blue-800 text-white rounded-2xl p-8 sm:p-10 text-center shadow-xl">
           <h2 className="text-3xl font-bold mb-4">Interested in Our Rice Varieties?</h2>
-          <p className="text-lg mb-6 max-w-2xl mx-auto">
-            Contact us for bulk orders, samples, and export inquiries. We deliver premium Indian rice to markets
-            worldwide with full quality assurance.
+          <p className="text-lg mb-6 max-w-2xl mx-auto text-blue-100">
+            Contact us for bulk orders, samples, and export inquiries. We deliver premium Indian rice to markets worldwide with full quality assurance.
           </p>
           <Link href="/#contact">
-            <Button size="lg" className="bg-white text-blue-900 hover:bg-gray-100">
+            <Button size="lg" className="bg-amber-500 hover:bg-amber-600 text-white">
               Contact Us
             </Button>
           </Link>
         </div>
       </main>
+
+      <SiteFooter />
     </div>
   )
 }

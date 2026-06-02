@@ -9,7 +9,6 @@ import {
   Clock,
   User,
   Tag,
-  ArrowLeft,
   ArrowRight,
   CheckCircle2,
   Quote,
@@ -18,6 +17,8 @@ import {
 } from "lucide-react"
 import blogPosts, { type BlogSection } from "@/lib/blog"
 import { BlogImage } from "@/components/blog-image"
+import { SiteHeader } from "@/components/site-header"
+import { SiteFooter } from "@/components/site-footer"
 
 export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }))
@@ -95,31 +96,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       {/* Header */}
-      <header className="bg-gradient-to-r from-blue-900 to-blue-800 text-white shadow-lg sticky top-0 z-40">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center shadow-md">
-                <img
-                  src="/assets/trs-logo.jpg"
-                  alt="TRS Bharat Global Solutions Logo"
-                  className="w-10 h-10 object-contain"
-                />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold">TRS Bharat Global Solutions</h1>
-                <p className="text-blue-200 text-sm">Premium Export Solutions</p>
-              </div>
-            </Link>
-            <Link href="/blog">
-              <Button variant="outline" className="text-black border-white hover:bg-gray-100">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                All Posts
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
       {/* Hero with image background */}
       <section className="relative bg-gradient-to-br from-blue-900 to-blue-800 text-white">
@@ -311,6 +288,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
         </div>
       </section>
 
+      <SiteFooter />
     </div>
   )
 }

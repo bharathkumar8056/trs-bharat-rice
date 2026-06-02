@@ -63,7 +63,7 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/assets/logo-trs.jpeg" type="image/png" />
         <link rel="apple-touch-icon" href="/assets/logo-trs.jpeg" />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           {children}
         </ThemeProvider>
