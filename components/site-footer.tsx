@@ -28,10 +28,10 @@ export function SiteFooter() {
               <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
                 <img src="/assets/logo-trs.jpeg" alt="TRS Bharat Logo" className="w-8 h-8 object-contain" />
               </div>
-              <span className="text-lg font-bold">TRS Bharat</span>
+              <span className="text-lg font-bold">TRS Bharat Rice Exports</span>
             </div>
             <p className="text-blue-200 text-sm leading-relaxed mb-4">
-              Premium Export Solutions • Connecting Indian agriculture to global markets with quality and trust.
+               Premium Indian Rice for Global Markets • Connecting Indian agriculture to global markets with quality and trust.
             </p>
             <div className="flex space-x-2">
               <a href="https://www.instagram.com/trsbharatexports/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"

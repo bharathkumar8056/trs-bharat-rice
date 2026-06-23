@@ -39,8 +39,8 @@ export function SiteHeader() {
               />
             </div>
             <div>
-              <h1 className="text-xl font-bold">TRS Bharat Global Solutions</h1>
-              <p className="text-blue-200 text-sm">Premium Export Solutions</p>
+              <h1 className="text-xl font-bold">TRS Bharat Rice Exports</h1>
+              <p className="text-blue-200 text-sm"> Premium Indian Rice for Global Markets</p>
             </div>
           </Link>
 

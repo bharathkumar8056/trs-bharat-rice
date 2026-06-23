@@ -41,9 +41,9 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: "TRS Bharat Global Solutions",
+  title: "TRS Bharat Rice Exports",
   description:
-    "Premium Export Solutions",
+    " Premium Indian Rice for Global Markets",
   icons: {
     icon: "/assets/logo-trs.jpeg",
     shortcut: "/assets/logo-trs.jpeg",

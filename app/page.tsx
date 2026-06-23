@@ -189,19 +189,29 @@ export default function HomePage() {
           <div className="max-w-3xl space-y-6">
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-white drop-shadow-lg">
               <span className="text-white">Premium </span>
-              <span className="text-amber-400">Global</span>
+              <span className="text-amber-400">Indian Rice</span>
               <br />
-              <span className="text-white">Solutions</span>
+              <span className="text-white">for Global Markets</span>
             </h2>
 
             <p className="text-blue-50 text-base sm:text-lg leading-relaxed drop-shadow">
-              At TRS Bharat Global Solutions, we are your trusted partner for premium-quality rice. We specialize in connecting the richness of Indian agriculture to global markets with
-              a strong focus on quality, consistency, and reliability. Our products are handpicked, processed with
-              care, and meet international food-grade certifications. With hassle-free export services, fast
-              processing, and secure global delivery, we ensure smooth end-to-end logistics for every order. We
-              believe in building long-term trade relationships based on trust, transparency, and performance. Backed
-              by secure payment systems and ethical practices, we are committed to excellence in every grain. Choose TRS Bharat — where Indian quality meets global standards.
+              At TRS Bharat Rice Exports, we proudly deliver premium-quality Indian rice to customers across the globe. Sourced from trusted farms and processed under strict quality standards, our rice is known for its purity, consistency, and exceptional taste.
+              With reliable sourcing, competitive pricing, efficient export management, and timely worldwide delivery, we help importers, distributors, wholesalers, and food businesses build a dependable supply chain.
+              Partner with TRS Bharat Rice Exports and experience the finest Indian rice backed by quality, trust, and global expertise.
             </p>
+
+            {/* Highlighted tagline pills */}
+            <div className="mt-6 flex flex-wrap gap-2 sm:gap-3">
+              {["Quality", "Consistency", "Reliability", "Global Reach"].map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-flex items-center px-4 py-1.5 rounded-full bg-amber-500/15 backdrop-blur-sm border border-amber-400/50 text-amber-200 text-sm sm:text-base font-semibold tracking-wide shadow-md hover:bg-amber-500/25 hover:border-amber-300 transition-all"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mr-2" />
+                  {tag}
+                </span>
+              ))}
+            </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
@@ -237,16 +247,24 @@ export default function HomePage() {
       </section> */}
 
       {/* About Section */}
-      <section id="about" className="py-16 px-4 bg-white">
+      <section id="about" className="pt-16 pb-8 px-4 bg-white">
         <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl sm:text-4xl font-bold text-blue-900 mb-4">About TRS Bharat Global Solutions</h3>
-            <p className="text-blue-700 text-lg max-w-3xl mx-auto">
-              We are a leading exporter of premium agricultural products from India, committed to delivering the highest
-              quality rice varieties to global markets.
-            </p>
+          <div className="text-center mb-8">
+            <h3 className="text-3xl sm:text-4xl font-bold text-blue-900 mb-6">About TRS Bharat Global Solutions</h3>
+            <div className="max-w-3xl mx-auto space-y-4 text-blue-700 text-lg leading-relaxed text-left sm:text-justify">
+              <p>
+                We are a trusted exporter of premium-quality Indian rice, committed to delivering excellence from farm to global markets. Our focus is on sourcing, processing, and exporting high-quality rice varieties that meet international standards for purity, taste, and consistency.
+              </p>
+              <p>
+                With a strong network of farmers, millers, and logistics partners, we ensure that every shipment is carefully selected, quality-checked, and packed to preserve freshness and nutritional value. We cater to wholesalers, distributors, retailers, and food service industries across the world.
+              </p>
+              <p>
+                Our product range includes Basmati Rice, Non-Basmati Rice, Sona Masoori Rice, Ponni Rice, and other specialty rice varieties tailored to customer requirements.
+              </p>
+            </div>
           </div>
 
+{/* 
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="border-blue-200 hover:shadow-lg transition-shadow">
               <CardHeader>
@@ -280,6 +298,37 @@ export default function HomePage() {
                 </p>
               </CardContent>
             </Card>
+          </div> */}
+        </div>
+      </section>
+
+       {/* Our Commitment Section */}
+      <section className="pt-4 pb-16 px-4 bg-white">
+        <div className="container mx-auto">
+          <div className="text-center mb-10">
+            <h3 className="text-3xl sm:text-4xl font-bold text-blue-900 mb-4">Our Commitment</h3>
+            <p className="text-blue-700 text-lg max-w-3xl mx-auto">
+              At TRS Bharat Global Solutions, we are committed to excellence in every aspect of our business.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 max-w-7xl mx-auto">
+            {[
+              { icon: Award, text: "Premium quality rice sourced from trusted growers" },
+              { icon: Check, text: "Strict quality control and international standards compliance" },
+              { icon: Package, text: "Customized packaging solutions" },
+              { icon: Truck, text: "Timely delivery and reliable logistics support" },
+              { icon: Globe, text: "Customer-focused approach and long-term business relationships" },
+            ].map((item, idx) => (
+              <Card key={idx} className="border-blue-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <CardContent className="p-6 flex flex-col items-center text-center">
+                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center mb-4 shadow-md">
+                    <item.icon className="w-7 h-7 text-white" />
+                  </div>
+                  <p className="text-blue-900 font-medium leading-snug">{item.text}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
@@ -415,7 +464,7 @@ export default function HomePage() {
               </div>
 
               {/* Text content moved below video */}
-              <div className="mt-8 text-center">
+              {/* <div className="mt-8 text-center">
                 <h4 className="text-xl sm:text-3xl font-bold text-blue-900 mb-3">Rice Manufacturing Excellence</h4>
                 <p className="text-blue-700 text-sm sm:text-lg mb-4">
                   State-of-the-art processing facilities ensuring premium quality rice for global markets
@@ -431,7 +480,7 @@ export default function HomePage() {
                     Export Ready
                   </Badge>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -561,59 +610,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Our Commitment Section */}
-      <section className="pt-8 pb-16 px-4 bg-white">
-        <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl sm:text-4xl font-bold text-blue-900 mb-4">Our Commitment</h3>
-            <p className="text-blue-700 text-lg max-w-3xl mx-auto">
-              At TRS Bharat Global Solutions, we are committed to excellence in every aspect of our business.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="border-blue-200 hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <CardTitle className="text-blue-900">Farmer Partnerships</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-blue-700">
-                  We work directly with farmers, ensuring fair practices and sustainable agriculture while maintaining
-                  premium quality.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-blue-200 hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <CardTitle className="text-blue-900">Environmental Responsibility</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-blue-700">
-                  We promote eco-friendly practices throughout our supply chain to minimize our environmental footprint.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-blue-200 hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <CardTitle className="text-blue-900">Customer Satisfaction</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-blue-700">
-                  We prioritize our clients' needs, offering personalized solutions and responsive support at every
-                  step.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
       {/* Dedicated Video Showcase Section */}
       <section className="py-20 px-4 bg-gradient-to-br from-blue-900 to-blue-800 text-white">
         <div className="container mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-4">
             {/* <h3 className="text-4xl sm:text-5xl font-bold mb-6">
               Watch Our <span className="text-amber-400">Journey</span>
             </h3>
