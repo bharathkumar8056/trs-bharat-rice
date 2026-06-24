@@ -49,6 +49,157 @@ export const riceVarieties: Rice[] = [
       "Rinse 2–3 times and soak for 20–30 minutes before cooking. Use a 1 : 1.75 rice-to-water ratio for fluffy, fully-elongated, separate grains.",
   },
   {
+    slug: "1121-basmati-rice",
+    name: "1121 Basmati Rice",
+    category: "Basmati",
+    tagline: "The World's Longest Grain Basmati",
+    shortDescription:
+      "An extra-long grain Basmati renowned worldwide for its record cooked length, exceptional elongation ratio and clean, separate, fluffy grains.",
+    description:
+      "Pusa 1121 — popularly known simply as 1121 Basmati — is the world's longest-grain Basmati variety, recognised by APEDA and exported in greater volume than any other Basmati line. Raw grains average 8.4 mm and elongate to over 20 mm when cooked, delivering an extraordinary 2.4× elongation with virtually no breakage. Its low amylose content keeps grains separate and fluffy, while a clean, mildly aromatic profile makes it the preferred choice for biryani houses, hospitality groups and premium retail brands across the Middle East, Europe and North America.",
+    image: "/assets/rice/1121-basmati-rice.jpg",
+    features: ["Extra-Long Grain", "High Elongation", "Aged Premium", "Export Grade"],
+    specifications: [
+      { label: "Grain Type", value: "Extra-Long Grain" },
+      { label: "Average Length (Raw)", value: "8.30 – 8.40 mm" },
+      { label: "Cooked Length", value: "Up to 20 mm" },
+      { label: "Color", value: "Creamy White" },
+      { label: "Aroma", value: "Mild, Natural" },
+      { label: "Aging", value: "12 – 24 months" },
+      { label: "Moisture", value: "≤ 13%" },
+      { label: "Broken Grains", value: "≤ 2%" },
+      { label: "Packaging", value: "5 / 10 / 25 / 50 kg PP, jute & retail packs" },
+    ],
+    usage: [
+      "Premium Hyderabadi & Lucknowi Biryani",
+      "Gulf-style Mandi, Kabsa & Majboos",
+      "High-end restaurant & hospitality programs",
+      "Retail private-label Basmati brands",
+    ],
+    cookingTip:
+      "Soak for 20–30 minutes and use a 1 : 1.75 rice-to-water ratio. The grains will elongate dramatically — keep the lid sealed during the final steam.",
+  },
+  {
+    slug: "pusa-basmati-rice",
+    name: "Pusa Basmati Rice",
+    category: "Basmati",
+    tagline: "Improved Aromatic Basmati",
+    shortDescription:
+      "An improved Basmati line bred by IARI Pusa — combining traditional aroma with longer, more uniform grains and consistent export-grade quality.",
+    description:
+      "Pusa Basmati was developed at the Indian Agricultural Research Institute (IARI), New Delhi, to retain the classic Basmati aroma while improving grain length, yield and uniformity. Grown across the GI-tagged Basmati belt of Punjab, Haryana, Uttarakhand and western UP, Pusa Basmati delivers slender, well-milled grains that elongate beautifully on cooking and carry the natural fragrance of 2-acetyl-1-pyrroline. It is one of the most widely traded Basmati lines in international markets, balancing premium quality with reliable year-round availability.",
+    image: "/assets/rice/pusa-basmati-rice.webp",
+    features: ["Long Grain", "Aromatic", "Uniform Milling", "Export Grade"],
+    specifications: [
+      { label: "Grain Type", value: "Long Grain" },
+      { label: "Average Length (Raw)", value: "7.5 – 8.0 mm" },
+      { label: "Color", value: "Creamy White" },
+      { label: "Aroma", value: "Strong, Natural" },
+      { label: "Aging", value: "12 – 18 months" },
+      { label: "Moisture", value: "≤ 13%" },
+      { label: "Broken Grains", value: "≤ 5%" },
+      { label: "Packaging", value: "5 / 10 / 25 / 50 kg PP, jute & retail packs" },
+    ],
+    usage: [
+      "Classic Indian Biryani & Pulao",
+      "Persian Polo & Tahdig",
+      "Middle Eastern rice platters",
+      "Retail premium Basmati ranges",
+    ],
+    cookingTip:
+      "Rinse twice and soak for 20 minutes. Use a 1 : 1.75 rice-to-water ratio for fluffy, well-separated grains.",
+  },
+  {
+    slug: "golden-sella-basmati-rice",
+    name: "Golden Sella Basmati Rice",
+    category: "Basmati",
+    tagline: "Parboiled Golden-Hued Basmati",
+    shortDescription:
+      "Premium parboiled Basmati with a rich golden hue, firm non-sticky texture and outstanding shelf life — the workhorse of large-scale biryani kitchens.",
+    description:
+      "Golden Sella is Basmati paddy that has been steam-parboiled before milling, locking nutrients into the grain and giving it a distinctive amber-gold color. The parboiling process hardens the starch, so cooked grains stay firm, separate and unbroken — even after extended holding in commercial kitchens. This makes Golden Sella the preferred Basmati for high-volume biryani restaurants, catering operators, airline kitchens and institutional buyers across the Middle East, Iran, Iraq and West Africa. It also offers a longer shelf life and reduced breakage during transit, making it ideal for long-haul export programs.",
+    image: "/assets/rice/golden-sella-basmati-rice.jpg",
+    features: ["Parboiled", "Golden Hue", "Firm Texture", "Long Shelf Life"],
+    specifications: [
+      { label: "Grain Type", value: "Long Grain (Parboiled)" },
+      { label: "Average Length (Raw)", value: "8.0 – 8.4 mm" },
+      { label: "Color", value: "Golden Amber" },
+      { label: "Aroma", value: "Mild, Natural" },
+      { label: "Texture", value: "Firm, Non-Sticky" },
+      { label: "Moisture", value: "≤ 12.5%" },
+      { label: "Broken Grains", value: "≤ 2%" },
+      { label: "Packaging", value: "5 / 10 / 25 / 50 kg PP, jute & retail packs" },
+    ],
+    usage: [
+      "Large-format Biryani houses & catering",
+      "Gulf-style Kabsa, Mandi & Majboos",
+      "Airline & institutional rice programs",
+      "Long-haul export to Middle East & West Africa",
+    ],
+    cookingTip:
+      "No soaking required. Rinse once and use a 1 : 2 rice-to-water ratio. Cooks in 18–20 minutes with perfectly separate grains.",
+  },
+  {
+    slug: "steam-basmati-rice",
+    name: "Steam Basmati Rice",
+    category: "Basmati",
+    tagline: "Steamed for Purity & Texture",
+    shortDescription:
+      "Basmati paddy gently steamed under pressure before milling — delivers a clean white grain with improved hardness, low breakage and excellent eating quality.",
+    description:
+      "Steam Basmati is produced by lightly steaming Basmati paddy at controlled pressure before husking and milling. Unlike full parboiling, this gentle steam process preserves the natural white color and aroma of Basmati while hardening the grain enough to dramatically reduce breakage during milling and transit. The result is a pristine creamy-white Basmati that elongates well, cooks fluffy and non-sticky, and holds its shape better than raw Basmati — making it a favorite for premium retail brands and quality-conscious foodservice operators.",
+    image: "/assets/rice/steam-basmati-rice.jpg",
+    features: ["Steamed", "Creamy White", "Low Breakage", "Premium Cook"],
+    specifications: [
+      { label: "Grain Type", value: "Long Grain (Steamed)" },
+      { label: "Average Length (Raw)", value: "7.5 – 8.2 mm" },
+      { label: "Color", value: "Creamy White" },
+      { label: "Aroma", value: "Natural Basmati" },
+      { label: "Texture", value: "Fluffy, Non-Sticky" },
+      { label: "Moisture", value: "≤ 13%" },
+      { label: "Broken Grains", value: "≤ 2%" },
+      { label: "Packaging", value: "5 / 10 / 25 / 50 kg PP, jute & retail packs" },
+    ],
+    usage: [
+      "Premium retail Basmati packs",
+      "Restaurant biryani & pulao programs",
+      "Middle Eastern rice platters",
+      "Export to EU, UK, US & Canada",
+    ],
+    cookingTip:
+      "Soak for 15 minutes and use a 1 : 1.75 rice-to-water ratio. Steam-finishing the cooked rice for 5 minutes gives the best fluffy texture.",
+  },
+  {
+    slug: "brown-basmati-rice",
+    name: "Brown Basmati Rice",
+    category: "Basmati",
+    tagline: "Wholegrain Aromatic Basmati",
+    shortDescription:
+      "Unpolished wholegrain Basmati that retains the bran layer — naturally rich in fiber, minerals and a nutty aroma, with a lower glycemic index than white rice.",
+    description:
+      "Brown Basmati is traditional long-grain Basmati that has had only the inedible outer husk removed, leaving the nutrient-rich bran and germ layers intact. The result is a wholegrain rice that carries the signature Basmati elongation and aroma alongside a nutty flavor, slightly chewy bite and substantially higher fiber, magnesium, B-vitamin and antioxidant content than its polished counterpart. With a lower glycemic index, Brown Basmati is increasingly favored by health-conscious consumers, diabetic-friendly food programs and wellness-focused retail ranges across the US, EU, Canada and Australia.",
+    image: "/assets/rice/brown-basmati-rice.webp",
+    features: ["Wholegrain", "High Fiber", "Low GI", "Natural Aroma"],
+    specifications: [
+      { label: "Grain Type", value: "Long Grain (Unpolished)" },
+      { label: "Average Length (Raw)", value: "7.5 – 8.2 mm" },
+      { label: "Color", value: "Light Brown" },
+      { label: "Aroma", value: "Nutty, Natural" },
+      { label: "Texture", value: "Firm, Slightly Chewy" },
+      { label: "Moisture", value: "≤ 13%" },
+      { label: "Broken Grains", value: "≤ 5%" },
+      { label: "Packaging", value: "1 / 5 / 10 / 25 kg health & retail packs" },
+    ],
+    usage: [
+      "Health-focused everyday meals",
+      "Wholegrain pulao & vegetable bowls",
+      "Diabetic-friendly & wellness ranges",
+      "Premium organic & natural-food retail",
+    ],
+    cookingTip:
+      "Soak for 30–45 minutes and use a 1 : 2.25 rice-to-water ratio. Cooks in 30–35 minutes — let it rest for 10 minutes for the best texture.",
+  },
+  {
     slug: "ponni-rice",
     name: "Ponni Rice",
     category: "Non-Basmati",

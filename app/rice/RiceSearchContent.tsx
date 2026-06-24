@@ -83,9 +83,6 @@ export default function RiceSearchContent() {
                 }`}
               >
                 {cat}
-                <span className="ml-2 text-xs opacity-75">
-                  ({cat === "All" ? riceVarieties.length : cat === "Basmati" ? basmatiVarieties.length : nonBasmatiVarieties.length})
-                </span>
               </button>
             ))}
           </div>
