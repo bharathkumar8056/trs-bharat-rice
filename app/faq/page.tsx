@@ -14,9 +14,24 @@ const faqs = [
       "Non-Basmati rice refers to rice varieties grown in India that are not aromatic Basmati. These include medium and short-grain varieties widely used for daily consumption across Asia, Africa, and the Middle East.",
   },
   {
+    question: "What is Basmati Rice?",
+    answer:
+      "Basmati rice is a long-grain aromatic rice known for its distinct fragrance, fluffy texture, and delicate flavor. It is primarily grown in India and Pakistan and is widely used in dishes like biryani, pulao, and fried rice.",
+  },
+  {
     question: "Which types of Non-Basmati Rice do you export?",
     answer:
       "We export popular Indian varieties such as Sona Masoori, IR-64, PR-11/PR-14, Ponni, Swarna, and 100% Broken Rice based on buyer requirements.",
+  },
+  {
+    question: "Which types of Basmati Rice do you offer?",
+    answer:
+      "We offer different varieties such as: Traditional Basmati Rice , 1121 Basmati Rice, Pusa Basmati Rice, Golden Sella  Basmati Rice, Steam Basmati Rice, Brown Basmati Rice.",
+  },
+  {
+    question: "What makes Basmati Rice different from regular rice?",
+    answer:
+      "Basmati rice has: Longer grains, Natural aroma and fragrance, Non-sticky texture after cooking, Light and fluffy consistency, and Unique taste compared to regular rice varieties.",
   },
   {
     question: "From which regions in India is your rice sourced?",
@@ -44,19 +59,14 @@ const faqs = [
       "Yes, we support private labeling with customized bag design and branding as per buyer requirements.",
   },
   {
+    question: "Do you provide bulk or wholesale orders?",
+    answer:
+      "Yes, we offer bulk supply and wholesale orders for distributors, retailers, restaurants, and international buyers.",
+  },
+  {
     question: "What certifications do you provide with the shipment?",
     answer:
       "We provide: Phytosanitary Certificate, Fumigation Certificate, Certificate of Origin, SGS/Intertek inspection (if required), and Health Certificate (if required).",
-  },
-  {
-    question: "What is the minimum order quantity (MOQ)?",
-    answer:
-      "MOQ is typically 1 x 20 ft container, but trial orders can be discussed.",
-  },
-  {
-    question: "What is the container loading capacity?",
-    answer:
-      "20 ft container: 24–26 MT. 40 ft container: 26–28 MT (depending on packing).",
   },
   {
     question: "What are your payment terms?",
@@ -68,13 +78,14 @@ const faqs = [
     answer:
       "Every lot undergoes pre-shipment quality checks, moisture testing, and sortex verification before container stuffing.",
   },
+   {
+    question: "Why choose our Basmati Rice?",
+    answer:
+      "Because we provide: Premium quality grains, Authentic aroma and taste, Strict quality control, Hygienic packaging, Reliable domestic and international supply.",
+  },
   {
     question: "What is the shelf life of Non-Basmati rice?",
     answer: "Properly stored rice has a shelf life of 12–24 months.",
-  },
-  {
-    question: "Is fumigation done before shipment?",
-    answer: "Yes, fumigation is mandatory and done as per importing country norms.",
   },
   {
     question: "Can you supply rice as per specific country standards?",
@@ -83,14 +94,6 @@ const faqs = [
   {
     question: "Do you provide samples before order confirmation?",
     answer: "Yes, samples can be couriered for quality approval.",
-  },
-  {
-    question: "What is the average lead time for shipment?",
-    answer: "Usually 10–15 days from order confirmation and payment/LC.",
-  },
-  {
-    question: "Do you handle export documentation?",
-    answer: "Yes, we handle complete export documentation and customs clearance from India.",
   },
   {
     question: "What makes Indian Non-Basmati rice preferred globally?",
@@ -119,11 +122,6 @@ const faqs = [
     question: "Do you offer customized grain length and broken percentage?",
     answer:
       "Yes, we can customize grain length, broken percentage, polishing level, and color sorting based on buyer specifications.",
-  },
-  {
-    question: "Can you arrange third-party inspection before shipment?",
-    answer:
-      "Yes, third-party inspections by SGS, Intertek, Bureau Veritas, or buyer-appointed agencies can be arranged.",
   },
   {
     question: "Can you supply rice throughout the year?",

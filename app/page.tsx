@@ -250,7 +250,7 @@ export default function HomePage() {
       <section id="about" className="pt-16 pb-8 px-4 bg-white">
         <div className="container mx-auto">
           <div className="text-center mb-8">
-            <h3 className="text-3xl sm:text-4xl font-bold text-blue-900 mb-6">About TRS Bharat Global Solutions</h3>
+            <h3 className="text-3xl sm:text-4xl font-bold text-blue-900 mb-6">About TRS Bharat Rice Exports</h3>
             <div className="max-w-3xl mx-auto space-y-4 text-blue-700 text-lg leading-relaxed text-left sm:text-justify">
               <p>
                 We are a trusted exporter of premium-quality Indian rice, committed to delivering excellence from farm to global markets. Our focus is on sourcing, processing, and exporting high-quality rice varieties that meet international standards for purity, taste, and consistency.
