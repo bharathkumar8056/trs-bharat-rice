@@ -308,7 +308,7 @@ export default function HomePage() {
           <div className="text-center mb-10">
             <h3 className="text-3xl sm:text-4xl font-bold text-blue-900 mb-4">Our Commitment</h3>
             <p className="text-blue-700 text-lg max-w-3xl mx-auto">
-              At TRS Bharat Global Solutions, we are committed to excellence in every aspect of our business.
+              At TRS Bharat Rice Exports, we are committed to excellence in every aspect of our business.
             </p>
           </div>
 

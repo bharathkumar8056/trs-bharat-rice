@@ -102,11 +102,11 @@ export default async function RiceDetailPage({ params }: { params: Promise<{ slu
               <Link href="/#contact" className="flex-1">
                 <Button size="lg" className="w-full bg-blue-900 hover:bg-blue-800 text-white">Request Quote</Button>
               </Link>
-              <Link href="/#contact" className="flex-1">
+              {/* <Link href="/#contact" className="flex-1">
                 <Button size="lg" variant="outline" className="w-full border-2 border-amber-600 text-amber-700 hover:bg-amber-50">
                   Request Sample
                 </Button>
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>
