@@ -160,19 +160,56 @@ export default function HomePage() {
   }
   const riceNames = riceVarieties.map((rice) => rice.name).join(", ")
 
+  // Hero video — force playback on mobile browsers that defer or block autoplay
+  const heroVideoRef = useRef<HTMLVideoElement>(null)
+  useEffect(() => {
+    const v = heroVideoRef.current
+    if (!v) return
+    v.muted = true
+    v.setAttribute("muted", "")
+    v.setAttribute("playsinline", "")
+    const tryPlay = () => {
+      const p = v.play()
+      if (p && typeof p.catch === "function") {
+        p.catch(() => {
+          const resume = () => {
+            v.play().catch(() => {})
+            window.removeEventListener("touchstart", resume)
+            window.removeEventListener("click", resume)
+            window.removeEventListener("scroll", resume)
+          }
+          window.addEventListener("touchstart", resume, { once: true, passive: true })
+          window.addEventListener("click", resume, { once: true })
+          window.addEventListener("scroll", resume, { once: true, passive: true })
+        })
+      }
+    }
+    if (v.readyState >= 2) tryPlay()
+    else v.addEventListener("loadeddata", tryPlay, { once: true })
+    const onVisibility = () => { if (!document.hidden) tryPlay() }
+    document.addEventListener("visibilitychange", onVisibility)
+    return () => document.removeEventListener("visibilitychange", onVisibility)
+  }, [])
+
   return (
     <div suppressHydrationWarning className="min-h-screen bg-gradient-to-br from-blue-50 to-amber-50">
       {/* Header */}
       <SiteHeader />
 
       {/* Hero Section — Full-width Banner Video with Overlaid Text */}
-      <section id="home" className="relative w-full h-[80vh] min-h-[700px] overflow-hidden">
+      <section
+        id="home"
+        className="relative w-full overflow-hidden flex items-center min-h-[640px] sm:min-h-[80vh] lg:min-h-[700px]"
+      >
         {/* Background Video */}
         <video
+          ref={heroVideoRef}
           autoPlay
           muted
           loop
           playsInline
+          preload="auto"
+          disablePictureInPicture
           className="absolute inset-0 w-full h-full object-cover"
           poster="/assets/hero-banner.jpg"
         >
@@ -185,27 +222,27 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-r from-blue-950/85 via-blue-900/65 to-blue-900/40" />
 
         {/* Overlaid Content */}
-        <div className="relative z-10 container mx-auto px-4 h-full flex items-center">
-          <div className="max-w-3xl space-y-6">
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-white drop-shadow-lg">
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 py-16 sm:py-20 lg:py-12 w-full">
+          <div className="max-w-3xl space-y-5 sm:space-y-6">
+            <h2 className="text-[1.75rem] xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white drop-shadow-lg break-words">
               <span className="text-white">Premium </span>
               <span className="text-amber-400">Indian Rice</span>
               <br />
               <span className="text-white">for Global Markets</span>
             </h2>
 
-            <p className="text-blue-50 text-base sm:text-lg leading-relaxed drop-shadow">
+            <p className="text-blue-50 text-sm sm:text-base md:text-lg leading-relaxed drop-shadow">
               At TRS Bharat Rice Exports, we proudly deliver premium-quality Indian rice to customers across the globe. Sourced from trusted farms and processed under strict quality standards, our rice is known for its purity, consistency, and exceptional taste.
               With reliable sourcing, competitive pricing, efficient export management, and timely worldwide delivery, we help importers, distributors, wholesalers, and food businesses build a dependable supply chain.
               Partner with TRS Bharat Rice Exports and experience the finest Indian rice backed by quality, trust, and global expertise.
             </p>
 
             {/* Highlighted tagline pills */}
-            <div className="mt-6 flex flex-wrap gap-2 sm:gap-3">
+            <div className="mt-4 sm:mt-6 flex flex-wrap gap-2 sm:gap-3">
               {["Quality", "Consistency", "Reliability", "Global Reach"].map((tag) => (
                 <span
                   key={tag}
-                  className="inline-flex items-center px-4 py-1.5 rounded-full bg-amber-500/15 backdrop-blur-sm border border-amber-400/50 text-amber-200 text-sm sm:text-base font-semibold tracking-wide shadow-md hover:bg-amber-500/25 hover:border-amber-300 transition-all"
+                  className="inline-flex items-center px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-amber-500/15 backdrop-blur-sm border border-amber-400/50 text-amber-200 text-xs sm:text-sm md:text-base font-semibold tracking-wide shadow-md hover:bg-amber-500/25 hover:border-amber-300 transition-all"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mr-2" />
                   {tag}
@@ -213,10 +250,10 @@ export default function HomePage() {
               ))}
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
               <Button
                 size="lg"
-                className="bg-amber-500 hover:bg-amber-600 text-white px-8 py-3 text-lg shadow-lg"
+                className="bg-amber-500 hover:bg-amber-600 text-white px-6 sm:px-8 py-3 text-base sm:text-lg shadow-lg w-full sm:w-auto"
                 onClick={() => scrollToSection("products")}
               >
                 Explore Products
@@ -224,7 +261,7 @@ export default function HomePage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white text-white bg-white/10 hover:bg-white hover:text-blue-900 px-8 py-3 text-lg font-medium backdrop-blur-sm"
+                className="border-2 border-white text-white bg-white/10 hover:bg-white hover:text-blue-900 px-6 sm:px-8 py-3 text-base sm:text-lg font-medium backdrop-blur-sm w-full sm:w-auto"
                 onClick={() => scrollToSection("contact")}
               >
                 Contact Us
