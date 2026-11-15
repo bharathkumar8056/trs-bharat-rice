@@ -20,7 +20,7 @@ const certifications: Certification[] = [
     fullName: "IEC",
     authority: "Import Export Code",
     image: "/assets/certifications/IEC.png",
-    badgeColor: "bg-blue-700",
+    badgeColor: "bg-yellow-700",
   },
   {
     code: "GST",
@@ -34,7 +34,14 @@ const certifications: Certification[] = [
     fullName: "FSSAI",
     authority: "Food Safety & Standards Authority of India Licence",
     image: "/assets/certifications/fssai.png",
-    badgeColor: "bg-green-700",
+    badgeColor: "bg-blue-700",
+  },
+  {
+   code:"Apeda",
+   fullName: "Apeda",
+   authority:"Agricultural And Processed Food Products Export Development Authority",
+   image: "/assets/certifications/apeda.png",
+   badgeColor: "bg-green-700",
   },
 ]
 
